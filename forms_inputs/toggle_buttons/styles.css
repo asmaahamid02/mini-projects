@@ -1,0 +1,613 @@
+/*RESET*/
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*VARIABLES*/
+:root {
+  --unchecked-bg: #ffe3e3;
+  --checked-bg: #c3f4f4;
+  --unchecked-color: #b91d09;
+  --checked-color: #158686;
+  --unchecked-overlay: #ce3a27;
+  --checked-overlay: #38afaf;
+  --dark-text: #4e4e4e;
+  --light-text: #fff;
+  --all-transition: 0.3s all ease;
+  --cubic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --left: 41px;
+}
+
+/*BODY*/
+body {
+  min-height: 100vh;
+  background-color: #f1f9f9;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: linear-gradient(
+    to top left,
+    var(--unchecked-bg),
+    var(--checked-bg)
+  );
+  background-repeat: no-repeat;
+}
+
+/*MAIN*/
+.container {
+  width: 600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 50px 10px 0 10px;
+  counter-reset: toggle-counter;
+}
+
+.box {
+  width: 100%;
+  height: 100px;
+  background-color: #fff;
+  box-shadow: 0 10px 20px -8px #c5d6d6;
+  border-radius: 4px;
+  position: relative;
+}
+
+.box::before {
+  counter-increment: toggle-counter;
+  content: counter(toggle-counter);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 12px;
+  color: #cecece;
+  padding: 5px;
+}
+
+/*COMMON*/
+.toggle-button {
+  width: 74px;
+  height: 36px;
+  position: relative;
+  top: 50%;
+  margin: -20px auto 0 auto;
+  overflow: hidden;
+}
+
+.knob,
+.layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.toggle-button.rounded,
+.toggle-button.rounded > .layer {
+  border-radius: 999px;
+}
+
+.toggle-button.squared,
+.toggle-button.squared > .layer {
+  border-radius: 2px;
+}
+
+.checkbox {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.layer {
+  z-index: 1;
+  width: 100%;
+  background-color: var(--unchecked-bg);
+}
+
+.knob {
+  z-index: 2;
+}
+
+.knob::before,
+.knob::after,
+.knob > span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+  transition: all 0.3s var(--cubic);
+}
+
+.rounded > .knob,
+.rounded > .knob::after,
+.rounded > .knob::before,
+.rounded > .knob span {
+  border-radius: 50%;
+}
+
+.squared > .knob,
+.squared > .knob::after,
+.squared > .knob::before,
+.squared > .knob span {
+  border-radius: 2px;
+}
+
+.knob::before {
+  background-color: var(--unchecked-color);
+  content: 'NO';
+}
+
+#toggle-1 .knob::after,
+#toggle-3 .knob::after,
+#toggle-5 .knob::after,
+#toggle-6 .knob::after,
+#toggle-16 .knob::after,
+#toggle-17 .knob::after,
+#toggle-18 .knob::after {
+  display: none;
+}
+
+.knob::after,
+#toggle-1 .checkbox:checked ~ .knob::before,
+#toggle-3 .checkbox:checked ~ .knob::before,
+#toggle-5 .checkbox:checked ~ .knob::before,
+#toggle-6 .checkbox:checked ~ .knob::before,
+#toggle-16 .checkbox:checked ~ .knob::before,
+#toggle-10 .knob::after,
+#toggle-17 .checkbox:checked ~ .knob::before,
+#toggle-18 .checkbox:checked ~ .knob::before {
+  content: 'YES';
+}
+
+.knob::after,
+#toggle-1 .checkbox:checked ~ .knob::before,
+#toggle-3 .checkbox:checked ~ .knob::before,
+#toggle-5 .checkbox:checked ~ .knob::before,
+#toggle-6 .checkbox:checked ~ .knob::before,
+#toggle-9 .checkbox:checked ~ .knob > span,
+#toggle-10 .checkbox:checked ~ .knob::before,
+#toggle-11 .checkbox:checked ~ .knob span,
+#toggle-12 .knob > span::before,
+#toggle-13 .checkbox:checked ~ .knob > span::before,
+#toggle-14 .knob > span::before,
+#toggle-16 .checkbox:checked ~ .knob::before,
+#toggle-17 .checkbox:checked ~ .knob > span,
+#toggle-18 .checkbox:checked ~ .knob > span {
+  background-color: var(--checked-color);
+}
+
+#toggle-1 .checkbox:checked ~ .knob::before,
+#toggle-3 .checkbox:checked ~ .knob::before,
+#toggle-4 .knob::after,
+#toggle-5 .checkbox:checked ~ .knob::before,
+#toggle-7 .knob::after,
+#toggle-8 .knob::after,
+#toggle-9 .checkbox:checked ~ .knob > span,
+#toggle-10 .checkbox:checked ~ .knob::before,
+#toggle-16 .checkbox:checked ~ .knob::before,
+#toggle-17 .checkbox:checked ~ .knob::before,
+#toggle-17 .checkbox:checked ~ .knob > span,
+#toggle-18 .checkbox:checked ~ .knob::before,
+#toggle-18 .checkbox:checked ~ .knob > span {
+  left: 41px;
+}
+
+#toggle-2 .knob::after,
+#toggle-9 .knob::after,
+#toggle-10 .knob::after,
+#toggle-11 .knob::after,
+#toggle-11 .knob span,
+#toggle-12 .knob::after,
+#toggle-13 .knob::after,
+#toggle-14 .knob::after,
+#toggle-15 .knob::after,
+#toggle-18 .checkbox:checked:active ~ .knob::before {
+  left: auto;
+}
+
+#toggle-12 .knob > span::before,
+#toggle-12 .knob > span::after,
+#toggle-13 .knob > span::before,
+#toggle-14 .knob > span::before,
+#toggle-14 .knob > span::after {
+  position: absolute;
+  top: 3px;
+  text-align: center;
+  line-height: 1;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--all-transition);
+}
+
+.knob,
+.layer,
+#toggle-1 .knob::before,
+#toggle-7 .knob::before,
+#toggle-7 .knob::after,
+#toggle-10 .knob::after,
+#toggle-10 .knob::before,
+#toggle-10 .knob span {
+  transition: var(--all-transition);
+}
+
+/* Toggle 1 */
+.checkbox:checked ~ .layer {
+  background-color: var(--checked-bg);
+}
+
+/* Toggle 2 */
+#toggle-2 .knob::after {
+  right: -30px;
+}
+
+#toggle-2 .checkbox:checked ~ .knob::before {
+  left: -30px;
+}
+
+#toggle-2 .checkbox:checked ~ .knob::after {
+  right: 3px;
+}
+
+/* Toggle 3 */
+#toggle-3 .checkbox:active ~ .knob::before {
+  width: 50px;
+  border-radius: 999px;
+}
+
+#toggle-3 .checkbox:checked:active ~ .knob::before {
+  margin-left: -20px;
+}
+
+#toggle-3 .knob::before,
+#toggle-17 .knob > span,
+#toggle-18 .knob > span {
+  transition: var(--all-transition), left 0.3s var(--cubic);
+}
+
+/* Toggle 4 */
+#toggle-4 .knob::after {
+  top: -30px;
+}
+
+#toggle-4 .checkbox:checked ~ .knob::before {
+  top: -30px;
+}
+
+#toggle-4 .checkbox:checked ~ .knob::after {
+  top: 3px;
+}
+
+/* Toggle 5  */
+#toggle-5 {
+  perspective: 60px;
+  overflow: visible;
+}
+
+#toggle-5 .layer {
+  transform: rotateY(0);
+  transform-origin: center;
+}
+
+#toggle-5 .checkbox:checked ~ .layer {
+  transform: rotateY(180deg);
+}
+
+/* Toggle 6  */
+#toggle-6 {
+  overflow: visible;
+}
+
+#toggle-6 .knob,
+#toggle-6 .layer,
+#toggle-6 .knob::before {
+  transform: rotateZ(0);
+  transition: all 0.4s var(--cubic);
+}
+
+#toggle-6 .checkbox:checked ~ .knob {
+  transform: rotateZ(-180deg);
+}
+
+#toggle-6 .checkbox:checked ~ .knob::before,
+#toggle-6 .checkbox:checked ~ .layer {
+  transform: rotateZ(180deg);
+}
+
+/* Toggle 7  */
+#toggle-7 .knob::after {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+#toggle-7 .checkbox:checked ~ .knob::before {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+#toggle-7 .checkbox:checked ~ .knob::after,
+#toggle-8 .checkbox:checked ~ .knob::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Toggle 8  */
+#toggle-8 .knob::after {
+  opacity: 0;
+  transform: scale(3);
+}
+
+#toggle-8 .checkbox:checked ~ .knob::before {
+  opacity: 0;
+  transform: scale(3);
+}
+
+/* Toggle 9  */
+#toggle-9 .knob::before,
+#toggle-9 .knob::after {
+  background-color: transparent;
+  z-index: 2;
+}
+
+#toggle-9 .knob::after {
+  right: -30px;
+}
+
+#toggle-9 .knob > span {
+  z-index: 1;
+  background-color: var(--unchecked-color);
+}
+
+#toggle-9 .checkbox:checked ~ .knob::before {
+  left: -30px;
+}
+
+#toggle-9 .checkbox:checked ~ .knob::after {
+  right: 3px;
+}
+
+/* Toggle 10  */
+#toggle-10 .knob::after,
+#toggle-10 .knob::before,
+#toggle-10 .knob span {
+  background-color: transparent;
+}
+
+#toggle-10 .knob::after {
+  right: 3px;
+  color: var(--dark-text);
+}
+
+#toggle-10 .knob::before {
+  content: '';
+  background-color: var(--unchecked-color);
+}
+
+#toggle-10 .checkbox:checked ~ .knob::after {
+  color: var(--light-text);
+}
+
+#toggle-10 .checkbox:checked ~ .knob span {
+  color: var(--dark-text);
+}
+
+/* Toggle 11  */
+#toggle-11 {
+  overflow: visible;
+}
+
+#toggle-11 .knob {
+  perspective: 70px;
+}
+
+#toggle-11 .knob::after,
+#toggle-11 .knob::before {
+  background-color: transparent;
+}
+
+#toggle-11 .knob::after {
+  right: 3px;
+}
+
+#toggle-11 .knob::before,
+#toggle-11 .knob::after {
+  color: var(--dark-text);
+}
+
+#toggle-11 .knob span {
+  z-index: 1;
+  width: 34px;
+  right: 3px;
+  transform: rotateY(0);
+  transform-origin: 0% 50%;
+  background-color: var(--unchecked-color);
+}
+
+#toggle-11 .checkbox:checked ~ .knob span {
+  transform: rotateY(-180deg);
+}
+
+/* Toggle 12  */
+
+#toggle-12 .knob::after,
+#toggle-12 .knob::before,
+#toggle-13 .knob::after,
+#toggle-13 .knob::before,
+#toggle-14 .knob::after,
+#toggle-14 .knob::before {
+  color: var(--dark-text);
+  background-color: transparent;
+}
+
+#toggle-12 .knob::after,
+#toggle-13 .knob::after,
+#toggle-14 .knob::after {
+  right: 3px;
+}
+
+#toggle-12 .knob > span,
+#toggle-12 .knob > span::before,
+#toggle-12 .knob > span::after,
+#toggle-13 .knob > span::before,
+#toggle-14 .knob > span::before,
+#toggle-14 .knob > span::after {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+}
+
+#toggle-12 .knob > span::before,
+#toggle-12 .knob > span::after,
+#toggle-13 .knob > span::before,
+#toggle-14 .knob > span::before,
+#toggle-14 .knob > span::after {
+  content: '';
+  top: 0;
+}
+
+#toggle-12 .knob > span,
+#toggle-13 .knob > span,
+#toggle-14 .knob > span {
+  z-index: 2;
+}
+
+#toggle-12 .knob > span::before {
+  left: -38px;
+}
+
+#toggle-12 .knob > span::after {
+  background-color: var(--unchecked-color);
+  right: -38px;
+}
+
+#toggle-12 .checkbox:checked ~ .knob > span::before {
+  left: 0;
+}
+
+#toggle-12 .checkbox:checked ~ .knob > span::after {
+  right: -75px;
+}
+
+/* Toggle 13  */
+#toggle-13 .knob > span::before {
+  left: 38px;
+  background-color: var(--unchecked-color);
+}
+
+#toggle-13 .checkbox:checked ~ .knob > span::before {
+  left: 0;
+}
+
+/* Toggle 14  */
+#toggle-14 .knob > span::before {
+  top: -34px;
+}
+
+#toggle-14 .knob > span::after {
+  background-color: var(--unchecked-color);
+  right: -38px;
+}
+
+#toggle-14 .checkbox:checked ~ .knob > span::before {
+  top: 0;
+}
+
+#toggle-14 .checkbox:checked ~ .knob > span::after {
+  top: -38px;
+}
+
+/* Toggle 15  */
+#toggle-15 .knob::after {
+  right: 3px;
+  transform: scale(4);
+  opacity: 0;
+}
+
+#toggle-15 .checkbox:checked ~ .knob::before {
+  transform: scale(4);
+  opacity: 0;
+}
+
+#toggle-15 .checkbox:checked ~ .knob::after {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Toggle 16  */
+#toggle-16 .checkbox:active ~ .knob::before {
+  width: 50px;
+}
+
+#toggle-16 .checkbox:checked:active ~ .knob::before {
+  margin-left: -20px;
+}
+
+/* Toggle 17  */
+#toggle-17 .knob::before {
+  background-color: transparent;
+  z-index: 2;
+}
+
+#toggle-17 .knob > span {
+  background-color: var(--unchecked-color);
+  z-index: 1;
+}
+
+#toggle-17 .knob::before {
+  transition: var(--all-transition), left 0.5s var(--cubic);
+}
+
+/*toggle 18*/
+#toggle-18 .knob::before {
+  z-index: 2;
+  background-color: transparent;
+  top: 50%;
+  height: 10px;
+  margin-top: -5px;
+}
+
+#toggle-18 .knob > span {
+  z-index: 1;
+  background-color: var(--unchecked-color);
+}
+
+#toggle-18 .checkbox:active ~ .knob::before {
+  left: 10px;
+  width: 52px;
+  height: 4px;
+  margin-top: -2px;
+  color: transparent;
+  background-color: var(--unchecked-overlay);
+  transition: var(--all-transition);
+}
+
+#toggle-18 .checkbox:active ~ .knob > span {
+  width: 67px;
+}
+
+#toggle-18 .checkbox:checked:active ~ .knob::before {
+  right: 10px;
+  background-color: var(--checked-overlay);
+}
+
+#toggle-18 .checkbox:checked:active ~ .knob > span {
+  margin-left: -38px;
+}

@@ -1,0 +1,135 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #b0578d;
+  --color-1: #facbea;
+  --color-2: #d988b9;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    to bottom left,
+    var(--color-1) 50%,
+    var(--color-2) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  width: 600px;
+  min-width: 400px;
+  box-shadow: 3px 6px 8px 2px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border-radius: 0.5em 1.5em;
+  padding: 2em 1.5em;
+  overflow: hidden;
+  margin: 2em;
+  color: #373737;
+}
+
+h1 {
+  font-size: 3.6em;
+  text-align: center;
+  margin-bottom: 0.4em;
+}
+
+.input-group {
+  position: relative;
+  height: 55px;
+  width: 100%;
+  margin-bottom: 1.2em;
+}
+
+.input-group > input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #e5e5e5;
+  outline: none;
+  background: #fff;
+  border-radius: 0.4em;
+  padding: 0 1em;
+  font-size: 0.95em;
+}
+
+::placeholder {
+  opacity: 0;
+}
+
+.input-group > label {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translate(0, -50%);
+  font-size: 0.95em;
+  background: #fff;
+  padding: 0 0.65em;
+  transition: all 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.input-group > input:focus + label,
+.input-group > input:not(:placeholder-shown) + label {
+  top: 0;
+  left: 5px;
+  font-size: 0.75em;
+  color: var(--primary);
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.input-group > input:focus {
+  border-width: 2px;
+  border-color: var(--primary);
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-footer > p {
+  font-size: 0.85em;
+  padding-left: 0.6em;
+}
+
+.form-footer a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.form-footer a:hover {
+  font-weight: bolder;
+}
+
+.form-footer > button {
+  border: 2px solid var(--primary);
+  outline: none;
+  background-color: var(--primary);
+  color: #fff;
+  font-size: 0.98em;
+  font-weight: 600;
+  padding: 0.8em 0.9em;
+  border-radius: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-footer > button:hover {
+  transform: scale(0.9);
+  background: #fff;
+  color: var(--primary);
+}

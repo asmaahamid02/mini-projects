@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #222;
+  --primary: #17bfb1;
+  --light: #aaa;
+  --dark: #333;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--light);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  display: block;
+  position: relative;
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 1.7em;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+  border-bottom: 1px solid var(--dark);
+  padding: 20px 10px;
+}
+
+.input-group > input[type='radio'] {
+  display: none;
+}
+
+.input-group > label {
+  margin-left: 60px;
+  position: relative;
+  display: block;
+  font-size: 1.2em;
+  font-weight: 300;
+  transition: color 0.25s linear;
+  cursor: pointer;
+}
+
+.check {
+  display: block;
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border: 5px solid var(--light);
+  border-radius: 50%;
+  left: 12px;
+  top: 17px;
+  transition: border 0.25s linear;
+}
+
+.input-group:hover > label {
+  color: #fff;
+}
+
+.input-group:hover > .check {
+  border: 5px solid #fff;
+}
+
+.check::before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  left: 3px;
+  top: 3px;
+  transition: background 0.25s linear;
+}
+
+.input-group > input[type='radio']:checked ~ label {
+  color: var(--primary);
+}
+
+.input-group > input[type='radio']:checked ~ .check {
+  border: 5px solid var(--primary);
+}
+
+.input-group > input[type='radio']:checked ~ .check::before {
+  background: var(--primary);
+}
